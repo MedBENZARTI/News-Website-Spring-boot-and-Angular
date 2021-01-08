@@ -1,0 +1,55 @@
+<div>
+  <div *ngIf="currentPost.id" class="edit-form">
+    <h4>Post</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentPost.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          id="category"
+          [(ngModel)]="currentPost.category"
+          name="category"
+        />
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <input
+          type="text"
+          class="form-control"
+          id="content"
+          [(ngModel)]="currentPost.content"
+          name="content"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deletePost()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updatePost()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentPost.id">
+    <br />
+    <p>Cannot access this Post...</p>
+  </div>
+</div>

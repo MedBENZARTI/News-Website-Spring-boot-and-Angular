@@ -1,0 +1,67 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by owner"
+        [(ngModel)]="owner"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchOwner()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>News List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let post of posts; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActivePost(post, i)"
+      >
+        {{ post.title }} - {{ post.owner }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPosts()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentPost">
+      <h4>Post</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentPost.title }}
+      </div>
+      <div>
+        <label><strong>Owner:</strong></label>
+        {{ currentPost.owner }}
+      </div>
+      <div>
+        <label><strong>Category:</strong></label>
+        {{ currentPost.category }}
+      </div>
+      <div>
+        <label><strong>Content:</strong></label>
+        {{ currentPost.content }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/posts/{{ currentPost.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentPost">
+      <br />
+      <p>Please click on a Post...</p>
+    </div>
+  </div>
+</div>
