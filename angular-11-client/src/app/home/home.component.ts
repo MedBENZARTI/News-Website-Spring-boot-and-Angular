@@ -12,13 +12,12 @@ export class HomeComponent implements OnInit {
   isLoggedIn = false;
   constructor(
     private userService: UserService,
-    private tsService: TokenStorageService
+    private tokenStorageService: TokenStorageService
   ) {}
 
   ngOnInit(): void {
-    if (this.tsService.getToken()) {
-      this.isLoggedIn = true;
-    }
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
     this.userService.getPublicContent().subscribe(
       (data) => {
         this.content = data;

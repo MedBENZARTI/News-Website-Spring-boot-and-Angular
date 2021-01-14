@@ -2,16 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/Post.model';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/Category.model';
 
 @Component({
-  selector: 'app-post-details',
-  templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css'],
+  selector: 'app-post-action',
+  templateUrl: './post-action.component.html',
+  styleUrls: ['./post-action.component.css'],
 })
-export class PostDetailsComponent implements OnInit {
+export class PostActionComponent implements OnInit {
+  categories: Category[] = [];
   currentPost: Post = {
     title: '',
     owner: '',
+    ownerId: '',
     category: '',
     content: '',
   };
@@ -20,12 +24,25 @@ export class PostDetailsComponent implements OnInit {
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
     this.message = '';
     this.getPost(this.route.snapshot.params.id);
+    this.retrieveCategories();
+  }
+
+  retrieveCategories(): any {
+    this.categoryService.getAll().subscribe(
+      (data: Category[]) => {
+        this.categories = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   getPost(id: string): void {

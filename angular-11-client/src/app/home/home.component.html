@@ -1,8 +1,6 @@
-<div class="container">
-  <header *ngIf="!isLoggedIn" class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
-  <div *ngIf="isLoggedIn" class="container mt-3">
-    <app-posts-list></app-posts-list>
-  </div>
+<header *ngIf="!isLoggedIn" class="jumbotron">
+  <app-welcome></app-welcome>
+</header>
+<div *ngIf="isLoggedIn" class="container mt-3">
+  <app-posts-list></app-posts-list>
 </div>

@@ -1,6 +1,6 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">bezKoder</a>
+    <a href="#" class="navbar-brand">TEK-UP News</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
         <a href="/posts" class="nav-link" routerLink="posts">Home </a>
@@ -8,16 +8,12 @@
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-      </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user"
-          >User</a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="/add" class="nav-link" *ngIf="isLoggedIn" routerLink="add"
+        <a
+          href="/add"
+          class="nav-link"
+          *ngIf="isLoggedIn && iswriter"
+          routerLink="add"
           >Add</a
         >
       </li>

@@ -14,13 +14,25 @@
       </div>
       <div class="form-group">
         <label for="category">Category</label>
-        <input
-          type="text"
-          class="form-control"
-          id="category"
-          [(ngModel)]="currentPost.category"
-          name="category"
-        />
+        <br />
+        <div ngbDropdown class="d-inline-block">
+          <select
+            id="categs"
+            name="categs"
+            [(ngModel)]="currentPost.category"
+            class="btn btn-outline-primary"
+            ngbDropdownToggle
+          >
+            <option
+              style="background-color: aliceblue"
+              *ngFor="let categ of categories"
+              [value]="categ.categoryName"
+              ngbDropdownItem
+            >
+              {{ categ.categoryName }}
+            </option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
         <label for="content">Content</label>

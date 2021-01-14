@@ -63,8 +63,8 @@ public class PostController {
 	@PostMapping("/posts")
 	public ResponseEntity<Post> createPost(@RequestBody Post post) {
 		try {
-			Post _post = postRepository
-					.save(new Post(post.getTitle(), post.getOwner(), post.getCategory(), post.getContent()));
+			Post _post = postRepository.save(new Post(post.getTitle(), post.getOwnerId(), post.getOwner(),
+					post.getCategory(), post.getContent()));
 			return new ResponseEntity<>(_post, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

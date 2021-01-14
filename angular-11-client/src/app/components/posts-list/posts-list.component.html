@@ -35,9 +35,10 @@
       Remove All
     </button>
   </div>
+  <!-- post details -->
   <div class="col-md-6">
     <div *ngIf="currentPost">
-      <h4>Post</h4>
+      <!-- <h4>Post</h4>
       <div>
         <label><strong>Title:</strong></label> {{ currentPost.title }}
       </div>
@@ -52,12 +53,122 @@
       <div>
         <label><strong>Content:</strong></label>
         {{ currentPost.content }}
-      </div>
+      </div> -->
 
-      <a class="badge badge-warning" routerLink="/posts/{{ currentPost.id }}">
+      <!-- <a
+        *ngIf="currentPost.ownerId == userId"
+        class="badge badge-warning"
+        routerLink="/posts/{{ currentPost.id }}"
+      >
         Edit
-      </a>
+      </a> -->
     </div>
+
+    <!-- end post detail -->
+    <!--new  post details -->
+
+    <div *ngIf="currentPost" class="card border-dark mb-3">
+      <div class="card-header">
+        <!-- <div class="text-left">
+          {{ currentPost.owner }}
+        </div>
+        <div class="text-right">
+          {{ currentPost.owner }}
+        </div> -->
+        <div class="row justify-content-between">
+          <div class="col">{{ currentPost.owner }}</div>
+          <div class="col-auto">
+            <a
+              *ngIf="currentPost.ownerId == userId"
+              class="badge badge-warning"
+              routerLink="/posts/{{ currentPost.id }}"
+            >
+              Edit
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body text-dark">
+        <h5 class="card-title">
+          {{ currentPost.title }} -- {{ currentPost.category }}
+        </h5>
+        <p class="card-text">{{ currentPost.content }}</p>
+      </div>
+      <div class="card-footer">
+        <!-- comments part -->
+        <p>
+          <button
+            type="button"
+            class="btn btn-primary btn-lg btn-block"
+            (click)="collapse.toggle()"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample"
+          >
+            Comments
+          </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <div class="card">
+            <div class="card-body">
+              <!-- add comment -->
+
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Add a new comment"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                  [(ngModel)]="commentContent"
+                  name="newComment"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="onAddComment()"
+                  >
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- end add comment -->
+
+              <!-- list comments -->
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="
+                    let comment of getCommentsById(currentPost.id);
+                    let j = index
+                  "
+                >
+                  <div class="row">
+                    <div class="col-auto mr-auto">
+                      <h6>{{ comment.username }}</h6>
+                      <p>{{ comment.content }}</p>
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        *ngIf="comment.userid === userId"
+                        class="btn btn-outline-danger"
+                        (click)="onDeleteComment(comment.id)"
+                      >
+                        <i class="bi bi-trash-fill"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <!-- list comments -->
+            </div>
+          </div>
+        </div>
+        <!--end comments part -->
+      </div>
+    </div>
+
+    <!-- end new post detail -->
 
     <div *ngIf="!currentPost">
       <br />

@@ -64,12 +64,13 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(
-				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
+				userDetails.getEmail(), userDetails.getUserType(), roles));
 	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
 		}
@@ -80,11 +81,9 @@ public class AuthController {
 
 		// Create new user's account
 		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()));
+				encoder.encode(signUpRequest.getPassword()), signUpRequest.getType());
 
 		Set<String> strRoles = signUpRequest.getRole();
-
-		System.out.println(strRoles);
 
 		Set<Role> roles = new HashSet<>();
 
@@ -101,12 +100,12 @@ public class AuthController {
 						roles.add(adminRole);
 
 						break;
-					case "mod":
-						Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-								.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-						roles.add(modRole);
+					// case "mod":
+					// Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+					// .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					// roles.add(modRole);
 
-						break;
+					// break;
 					default:
 						Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 								.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -116,8 +115,23 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
-		userRepository.save(user);
-
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		User savedUser = userRepository.save(user);
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println(savedUser);
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println(signUpRequest.toString());
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!", savedUser));
 	}
 }

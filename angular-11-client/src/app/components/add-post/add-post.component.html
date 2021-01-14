@@ -1,41 +1,94 @@
-<div>
-  <div class="submit-form">
-    <div>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          required
-          [(ngModel)]="post.title"
-          name="title"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="category">Category</label>
-        <input
-          class="form-control"
-          id="category"
-          required
-          [(ngModel)]="post.category"
-          name="category"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="content">Content</label>
-        <input
-          class="form-control"
-          id="content"
-          required
-          [(ngModel)]="post.content"
-          name="content"
-        />
-      </div>
-
-      <button (click)="savePost()" class="btn btn-success">Submit</button>
+<!-- aaaaaaaaaaaaaaaaaaa -->
+<br />
+<br />
+<div class="container">
+  <div class="row form-group justify-content-md-center">
+    <div class="col-1">
+      <!-- title -->
+      <label for="title">Title</label>
     </div>
+    <div class="col-6">
+      <!-- input title -->
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        required
+        [(ngModel)]="post.title"
+        name="title"
+      />
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-1">
+      <!-- categ -->
+      <label for="title">Category</label>
+    </div>
+
+    <div class="col-md-auto">
+      <!-- dropbx -->
+      <div ngbDropdown class="d-inline-block">
+        <select
+          id="categs"
+          name="categs"
+          [(ngModel)]="post.category"
+          class="btn btn-outline-primary"
+          ngbDropdownToggle
+        >
+          <option
+            style="background-color: aliceblue"
+            *ngFor="let categ of categories"
+            [value]="categ.categoryName"
+            ngbDropdownItem
+          >
+            {{ categ.categoryName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <!-- new -->
+      <label for="title">New</label>
+    </div>
+    <div class="col-md-auto form-group">
+      <!-- input new categ -->
+
+      <input
+        class="form-control"
+        id="category"
+        required
+        [(ngModel)]="newCateg"
+        name="category"
+      />
+    </div>
+
+    <div class="col-md-auto">
+      <!-- add new categ -->
+      <button type="button" class="btn btn-success" (click)="onAddCategory()">
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-1">
+      <!-- content -->
+      <label for="content">Content</label>
+    </div>
+    <div class="col-6">
+      <!-- input content -->
+      <textarea
+        class="form-control"
+        id="content"
+        required
+        [(ngModel)]="post.content"
+        name="content"
+        rows="5"
+      >
+      </textarea>
+    </div>
+  </div>
+  <br />
+  <div class="row justify-content-md-center">
+    <button (click)="savePost()" class="btn btn-success">Submit</button>
   </div>
 </div>

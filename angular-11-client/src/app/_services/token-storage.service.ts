@@ -8,18 +8,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root',
 })
 export class TokenStorageService {
-  private authStatusListener = new Subject<boolean>();
-  private isAuthenticated = false;
-
   constructor() {}
-
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
-  }
-
-  getIsAuth() {
-    return this.isAuthenticated;
-  }
 
   signOut(): void {
     window.sessionStorage.clear();
