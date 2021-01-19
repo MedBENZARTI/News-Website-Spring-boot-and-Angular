@@ -1,6 +1,5 @@
-<header *ngIf="!isLoggedIn" class="jumbotron">
-  <app-welcome></app-welcome>
-</header>
+<header *ngIf="!isLoggedIn"></header>
+<app-welcome></app-welcome>
 <div *ngIf="isLoggedIn" class="container mt-3">
   <app-posts-list></app-posts-list>
 </div>

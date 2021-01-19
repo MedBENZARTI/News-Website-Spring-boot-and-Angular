@@ -31,50 +31,14 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPosts()">
+    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPosts()">
       Remove All
-    </button>
+    </button> -->
   </div>
-  <!-- post details -->
+  <!--new  post details -->
   <div class="col-md-6">
-    <div *ngIf="currentPost">
-      <!-- <h4>Post</h4>
-      <div>
-        <label><strong>Title:</strong></label> {{ currentPost.title }}
-      </div>
-      <div>
-        <label><strong>Owner:</strong></label>
-        {{ currentPost.owner }}
-      </div>
-      <div>
-        <label><strong>Category:</strong></label>
-        {{ currentPost.category }}
-      </div>
-      <div>
-        <label><strong>Content:</strong></label>
-        {{ currentPost.content }}
-      </div> -->
-
-      <!-- <a
-        *ngIf="currentPost.ownerId == userId"
-        class="badge badge-warning"
-        routerLink="/posts/{{ currentPost.id }}"
-      >
-        Edit
-      </a> -->
-    </div>
-
-    <!-- end post detail -->
-    <!--new  post details -->
-
     <div *ngIf="currentPost" class="card border-dark mb-3">
       <div class="card-header">
-        <!-- <div class="text-left">
-          {{ currentPost.owner }}
-        </div>
-        <div class="text-right">
-          {{ currentPost.owner }}
-        </div> -->
         <div class="row justify-content-between">
           <div class="col">{{ currentPost.owner }}</div>
           <div class="col-auto">
@@ -160,7 +124,7 @@
                   </div>
                 </li>
               </ul>
-              <!-- list comments -->
+              <!-- end list comments -->
             </div>
           </div>
         </div>

@@ -1,6 +1,13 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">TEK-UP News</a>
+    <a href="#" class="navbar-brand"></a>
+    <img
+      src="../../../assets/img/logo.png "
+      class="navbar-brand"
+      style="width: 85px; padding: 0"
+      alt=""
+    />
+    <!-- -->
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
         <a href="/posts" class="nav-link" routerLink="posts">Home </a>
@@ -40,7 +47,5 @@
     </ul>
   </nav>
 
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
 </div>
